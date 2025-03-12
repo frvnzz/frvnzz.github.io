@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
+import createSlug from "../lib/createSlug";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -11,38 +13,74 @@ const last_posts = posts.slice(0, 3);
 
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-12 mt-5">
-    <div class="text-xl py-1">Hi</div>
-    <div class="text-5xl font-bold">I'm Franz</div>
+    <div class="text-xl py-1">Hi 👋</div>
+    <div class="text-5xl font-bold">I'm Franz-Aurel Huber</div>
     <div class="text-3xl py-3 font-bold">Student at UAS St. Pölten</div>
-    <div class="text-2xl py-2">
-      I like frontend development and UI/UX design.
+    <div class="py-2 text-lg">
+      I like <b>frontend development</b> and <b>UI/UX design</b>. I am
+      passionate about creating seamless digital experiences and I love cars. I
+      started programming in late 2022 as part of my studies and I aim to
+      improve ever since.
     </div>
-  </div>
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">
-      My latest projects can be found on <a
+    <div class="mt-8">
+      <a
         href="https://github.com/frvnzz"
-        class="text-blue-500 underline">GitHub {"</>"}</a
+        target="_blank"
+        class="btn btn-outline">Check out my GitHub</a
       >
     </div>
   </div>
 
-  <div class="mt-6">
-    <div class="text-2xl font-bold">Skills</div>
-    <ul class="list-disc pl-5 mt-2 text-lg">
-      <li>Figma</li>
-      <li>Object-Oriented Programming</li>
-      <li>Git</li>
-      <li>Adobe Creative Suite</li>
-      <li>Kotlin</li>
-      <li>HTML</li>
-      <li>Astro</li>
-      <li>Node.js</li>
-      <li>Blender</li>
-      <li>C#</li>
-      <li>Unity</li>
-      <li>SQL</li>
-    </ul>
+  {
+    last_posts.map((post) => (
+      <>
+        <HorizontalCard
+          title={post.data.title}
+          img={post.data.heroImage}
+          desc={post.data.description}
+          url={"/blog/" + createSlug(post.data.title, post.slug)}
+          target="_self"
+          badge={post.data.badge}
+        />
+        <div class="divider my-0" />
+      </>
+    ))
+  }
+
+  <div class="mt-10">
+    <div class="text-3xl font-bold mb-3">Skills &lt;/&gt;</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <HorizontalCard title="Figma" desc="Design and prototyping" url="#" />
+      <HorizontalCard
+        title="Object-Oriented Programming"
+        desc="Programming paradigm"
+        url="#"
+      />
+      <HorizontalCard title="Git" desc="Version control" url="#" />
+      <HorizontalCard
+        title="Adobe Creative Suite"
+        desc="Creative software"
+        url="#"
+      />
+      <HorizontalCard
+        title="Kotlin"
+        desc="Modern programming language"
+        url="#"
+      />
+      <HorizontalCard title="HTML" desc="Markup language for the web" url="#" />
+      <HorizontalCard title="Astro" desc="Static site generator" url="#" />
+      <HorizontalCard title="Node.js" desc="JavaScript runtime" url="#" />
+      <HorizontalCard title="Blender" desc="3D modeling software" url="#" />
+      <HorizontalCard title="C#" desc="Object-oriented language" url="#" />
+      <HorizontalCard title="Unity" desc="Real-time 3D development" url="#" />
+      <HorizontalCard title="SQL" desc="Database management" url="#" />
+      <HorizontalCard
+        title="Tailwind CSS"
+        desc="Utility-first CSS framework"
+        url="#"
+      />
+      <HorizontalCard title="React" desc="UI library for JavaScript" url="#" />
+      <HorizontalCard title="Yaml" desc="Data serialization format" url="#" />
+    </div>
   </div>
 </BaseLayout>
