@@ -50,6 +50,12 @@
         const themeToggle = document.getElementById("theme-toggle");
         let currentTheme = localStorage.getItem("theme");
 
+        // default theme
+        if (!currentTheme) {
+            currentTheme = themes.dark;
+            localStorage.setItem("theme", themes.dark);
+        }
+
         if (currentTheme === themes.dark) {
             enableDarkTheme();
         } else {
