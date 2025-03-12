@@ -1,4 +1,5 @@
+# robots.txt - This file tells web crawlers which parts of the site they are allowed to access and provides the location of the sitemap for better indexing.
 User-agent: *
 Allow: /
 
-Sitemap: https://astrofy-template.netlify.app/sitemap-index.xml
+Sitemap: https://frvnzz.github.io/sitemap-index.xml
