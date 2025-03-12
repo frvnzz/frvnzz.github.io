@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
 import { ViewTransitions } from "astro:transitions";
+import dark from "../components/ThemeSelector.astro";
 
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
@@ -18,7 +19,8 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="business">
+<!--Default theme from ThemeSelector.astro-->
+<html lang="en" data-theme={dark}>
   <head>
     <BaseHead
       title={title}
