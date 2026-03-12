@@ -2,18 +2,19 @@
 
 import { GENERATE_SLUG_FROM_TITLE } from '../config'
 
-export default function (title: string, staticSlug: string) {
-  return (
-    !GENERATE_SLUG_FROM_TITLE ? staticSlug : title
+export default function createSlug(title: string, staticSlug: string) {
+  if (GENERATE_SLUG_FROM_TITLE) {
+    return title
       // remove leading & trailing whitespace
       .trim()
       // output lowercase
       .toLowerCase()
       // replace spaces
-      .replace(/\s+/g, '-')
+      .replaceAll(' ', '-')
       // remove special characters
-      .replace(/[^\w-]/g, '')
-      // remove leading & trailing separtors
-      .replace(/^-+|-+$/g, '')
-  )
+      .replaceAll(/[^\w-]/g, '')
+      // remove leading & trailing separators
+      .replaceAll(/^-+|-+$/g, '');
+  }
+  return staticSlug;
 }
