@@ -5,20 +5,39 @@ const activeClass = "bg-base-300"; // For primary color replace with `active` cl
 
 <ul class="menu grow shrink menu-md overflow-y-auto">
   <li class="mb-1">
-    <a class="py-3 text-base" id="home" href="/">Home</a>
+    <a
+      class:list={[
+        "py-3 text-base",
+        sideBarActiveItemID === "home" && activeClass,
+      ]}
+      aria-current={sideBarActiveItemID === "home" ? "page" : undefined}
+      href="/"
+    >
+      Home
+    </a>
   </li>
   <li class="mb-1">
-    <a class="py-3 text-base" id="projects" href="/projects">Projects</a>
+    <a
+      class:list={[
+        "py-3 text-base",
+        sideBarActiveItemID === "projects" && activeClass,
+      ]}
+      aria-current={sideBarActiveItemID === "projects" ? "page" : undefined}
+      href="/projects"
+    >
+      Projects
+    </a>
   </li>
-  <li><a class="py-3 text-base" id="cv" href="/cv">CV</a></li>
+  <li>
+    <a
+      class:list={[
+        "py-3 text-base",
+        sideBarActiveItemID === "cv" && activeClass,
+      ]}
+      aria-current={sideBarActiveItemID === "cv" ? "page" : undefined}
+      href="/cv"
+    >
+      CV
+    </a>
+  </li>
 </ul>
-
-<script
-  define:vars={{
-    sideBarActiveItemID: sideBarActiveItemID,
-    activeClass: activeClass,
-  }}
->
-  const activeItemElem = document.getElementById(sideBarActiveItemID);
-  activeItemElem && activeItemElem.classList.add(activeClass);
-</script>
