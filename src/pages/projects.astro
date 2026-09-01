@@ -1,65 +1,63 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+
+import bankingapp from "../assets/projects/bankingapp.png";
+import calendaricon from "../assets/projects/calendaricon.png";
+import deadwood from "../assets/projects/deadwood.png";
+import nextjs from "../assets/projects/nextjs.png";
+import petapp from "../assets/projects/petapp.png";
+
+const projects = [
+  {
+    title: "Deadwood",
+    img: deadwood,
+    desc: "A Unity game developed in a team of 4 during the SS25 of Creative Computing as part of the CCL4",
+    url: "https://github.com/frvnzz/CCL4",
+  },
+  {
+    title: "Banking App Design",
+    img: bankingapp,
+    desc: "Responsive Design Concept made with Figma",
+    url: "https://www.figma.com/design/SSy7okgJEX9KMqOuNXyQP5/Huber_Franz-Aurel_cc231014?node-id=1-10",
+  },
+  {
+    title: "Habit Tracker App",
+    img: calendaricon,
+    desc: "Native Android app developed with Kotlin",
+    url: "https://marcfichtl.github.io/habittracker/",
+  },
+  {
+    title: "Tower of Hanoi Solver",
+    // Animated GIF: kept in `public/` so the animation survives optimisation.
+    img: "/projectfiles/towerofhanoi.gif",
+    desc: "Tower of Hanoi Solver developed with C#",
+    url: "https://github.com/frvnzz/TowerOfHanoi-Solver",
+  },
+  {
+    title: "Pokémon Team Builder",
+    img: nextjs,
+    desc: "React app to build Pokémon teams developed with Next.js",
+    url: "https://pokemonteamcreator-cc231014s-projects.vercel.app/",
+  },
+  {
+    title: "Pet Sitter App",
+    img: petapp,
+    desc: "Mobile User Interface Design for a Pet Sitter App",
+    url: "https://www.figma.com/design/anTmpWg2sgmLmzySbYCFsv/UID-Project---Pet-App?node-id=201-3265&p=f&t=UUGQHpJQWC8UHquO-0",
+  },
+];
 ---
 
 <BaseLayout title="Projects" sideBarActiveItemID="projects">
-  <div>
-    <div class="text-3xl w-full font-bold mb-5">University Projects</div>
-  </div>
+  <h1 class="text-3xl w-full font-bold mb-5">University Projects</h1>
 
-  <HorizontalCard
-    title="Deadwood"
-    img="/projectfiles/deadwood.png"
-    desc="A Unity game developed in a team of 4 during the SS25 of Creative Computing as part of the CCL4"
-    url="https://github.com/frvnzz/CCL4"
-    loading="eager"
-  />
-
-  <div class="divider my-0"></div>
-
-  <HorizontalCard
-    title="Banking App Design"
-    img="/projectfiles/bankingapp.png"
-    desc="Responsive Design Concept made with Figma"
-    url="https://www.figma.com/design/SSy7okgJEX9KMqOuNXyQP5/Huber_Franz-Aurel_cc231014?node-id=1-10"
-    loading="eager"
-  />
-
-  <div class="divider my-0"></div>
-
-  <HorizontalCard
-    title="Habit Tracker App"
-    img="/projectfiles/calendaricon.png"
-    desc="Native Android app developed with Kotlin"
-    url="https://marcfichtl.github.io/habittracker/"
-    loading="eager"
-  />
-
-  <div class="divider my-0"></div>
-
-  <HorizontalCard
-    title="Tower of Hanoi Solver"
-    img="/projectfiles/towerofhanoi.gif"
-    desc="Tower of Hanoi Solver developed with C#"
-    url="https://github.com/frvnzz/TowerOfHanoi-Solver"
-  />
-
-  <div class="divider my-0"></div>
-
-  <HorizontalCard
-    title="Pokémon Team Builder"
-    img="/projectfiles/nextjs.png"
-    desc="React app to build Pokémon teams developed with Next.js"
-    url="https://pokemonteamcreator-cc231014s-projects.vercel.app/"
-  />
-
-  <div class="divider my-0"></div>
-
-  <HorizontalCard
-    title="Pet Sitter App"
-    img="/projectfiles/petapp.png"
-    desc="Mobile User Interface Design for a Pet Sitter App"
-    url="https://www.figma.com/design/anTmpWg2sgmLmzySbYCFsv/UID-Project---Pet-App?node-id=201-3265&p=f&t=UUGQHpJQWC8UHquO-0"
-  />
+  {
+    projects.map((project, index) => (
+      <>
+        {index > 0 && <div class="divider my-0" />}
+        <HorizontalCard {...project} loading={index < 3 ? "eager" : "lazy"} />
+      </>
+    ))
+  }
 </BaseLayout>

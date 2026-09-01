@@ -1,147 +1,134 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
+
+const education = [
+  {
+    title: "MSc, Digital Media Management",
+    subtitle:
+      "September 2026 until now at USTP – University of Applied Sciences St. Pölten, Austria",
+  },
+  {
+    title: "BSc, Creative Computing",
+    subtitle:
+      "September 2023 to July 2026 at USTP – University of Applied Sciences St. Pölten, Austria",
+  },
+  {
+    title: "Smart Engineering",
+    subtitle:
+      "2022 to 2023 at USTP – University of Applied Sciences St. Pölten, Austria",
+  },
+  {
+    title: "Matura",
+    subtitle: "2012 to 2020 at BRG Krems Ringstraße, Krems an der Donau, Austria",
+  },
+];
+
+const experience = [
+  {
+    title:
+      "Part-Time Software Developer, Niederösterreichische Versicherung AG",
+    subtitle: "since November 2025",
+  },
+  {
+    title:
+      "Frontend Development Intern, Niederösterreichische Versicherung AG",
+    subtitle: "August 2025 to October 2025",
+  },
+  {
+    title: "Crisis Management Support, Land Niederösterreich",
+    subtitle: "December 2021 to June 2023",
+  },
+  { title: "Summer Job, Geberit Pottenbrunn", subtitle: "July 2021 to August 2021" },
+  {
+    title: "Civil Service, NÖ Pflege- und Betreuungszentrum Herzogenburg",
+    subtitle: "October 2020 to June 2021",
+  },
+  { title: "Summer Job, Geberit Pottenbrunn", subtitle: "July 2020" },
+  {
+    title: "Internship, Stadtgemeinde Traismauer, Rathaus",
+    subtitle: "August 2019",
+  },
+  {
+    title: "Summer Job, NÖ Pflege- und Betreuungszentrum Herzogenburg",
+    subtitle: "August 2018",
+  },
+  { title: "Internship, Bauamt Traismauer", subtitle: "July 2018" },
+];
+
+const linkedInCertifications =
+  "https://www.linkedin.com/in/franz-aurelhuber/details/certifications/";
+
+const certifications = [
+  { label: "Google: Introduction to Generative AI", href: linkedInCertifications },
+  { label: "Cambridge English C1 Advanced", href: linkedInCertifications },
+  {
+    label: "EF SET English Certificate 72/100 (C2 Proficient)",
+    href: "https://cert.efset.org/ApcqTH",
+  },
+  { label: "Google: Data Engineer Basics", href: linkedInCertifications },
+];
+
+const languages = [
+  "German – mother tongue",
+  "English – fluent",
+  "French – intermediate",
+];
 ---
 
 <BaseLayout title="Resume" sideBarActiveItemID="cv">
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Profile</div>
-  </div>
+  <h1 class="sr-only">Resume</h1>
 
-  <div class="mb-10 text-justify">
+  <h2 class="text-3xl w-full font-bold mb-5">Profile</h2>
+
+  <p class="mb-10 text-justify">
     My name is Franz-Aurel, I am 24 years old and I was born in Austria. I am
     currently studying
     <a
       href="https://www.ustp.at/en/study-programmes/media-digital-technologies/digital-media-management/course-contents"
       target="_blank"
       rel="noopener noreferrer"
-      style="text-decoration: underline;">Digital Media Management</a
+      class="underline">Digital Media Management</a
     >
     at the University of Applied Sciences St. Pölten (USTP). I like good design and
     I am a perfectionist at heart. I love logic and problem solving and I love fixing
     my cars.
-  </div>
+  </p>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Education</div>
-  </div>
+  <h2 class="text-3xl w-full font-bold mb-5">Education</h2>
 
   <div class="time-line-container grid gap-4 mb-10">
-    <TimeLineElement
-      title="MSc, Digital Media Management"
-      subtitle="September 2026 until now at USTP – University of Applied Sciences St. Pölten, Austria"
-    />
-    <TimeLineElement
-      title="BSc, Creative Computing"
-      subtitle="September 2023 to July 2026 at USTP – University of Applied Sciences St. Pölten, Austria"
-    />
-    <TimeLineElement
-      title="Smart Engineering"
-      subtitle="2022 to 2023 at USTP – University of Applied Sciences St. Pölten, Austria"
-    />
-    <TimeLineElement
-      title="Matura"
-      subtitle="2012 to 2020 at BRG Krems Ringstraße, Krems an der Donau, Austria"
-    />
+    {education.map((entry) => <TimeLineElement {...entry} />)}
   </div>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Experience</div>
-  </div>
+  <h2 class="text-3xl w-full font-bold mb-5">Experience</h2>
 
   <div class="time-line-container mb-10">
-    <TimeLineElement
-      title="Part-Time Software Developer, Niederösterreichische Versicherung AG"
-      subtitle="since November 2025"
-    />
-    <TimeLineElement
-      title="Frontend Development Intern, Niederösterreichische Versicherung AG"
-      subtitle="August 2025 to October 2025"
-    />
-    <TimeLineElement
-      title="Crisis Management Support, Land Niederösterreich"
-      subtitle="December 2021 to June 2023"
-    />
-    <TimeLineElement
-      title="Summer Job, Geberit Pottenbrunn"
-      subtitle="July 2021 to August 2021"
-    />
-    <TimeLineElement
-      title="Civil Service, NÖ Pflege- und Betreuungszentrum Herzogenburg"
-      subtitle="October 2020 to June 2021"
-    />
-    <TimeLineElement
-      title="Summer Job, Geberit Pottenbrunn"
-      subtitle="July 2020"
-    />
-    <TimeLineElement
-      title="Internship, Stadtgemeinde Traismauer, Rathaus"
-      subtitle="August 2019"
-    />
-    <TimeLineElement
-      title="Summer Job, NÖ Pflege- und Betreuungszentrum Herzogenburg"
-      subtitle="August 2018"
-    />
-    <TimeLineElement
-      title="Internship, Bauamt Traismauer"
-      subtitle="July 2018"
-    />
+    {experience.map((entry) => <TimeLineElement {...entry} />)}
   </div>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Certifications</div>
-  </div>
+  <h2 class="text-3xl w-full font-bold mb-5">Certifications</h2>
 
   <ul class="list-disc mx-6 mb-10 grid gap-2">
-    <li>
-      <a
-        href="https://www.linkedin.com/in/franz-aurelhuber/details/certifications/"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="text-decoration: underline;"
-      >
-        Google: Introduction to Generative AI</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://www.linkedin.com/in/franz-aurelhuber/details/certifications/"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="text-decoration: underline;"
-      >
-        Cambridge English C1 Advanced</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://cert.efset.org/ApcqTH"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="text-decoration: underline;"
-      >
-        EF SET English Certificate 72/100 (C2 Proficient)</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://www.linkedin.com/in/franz-aurelhuber/details/certifications/"
-        target="_blank"
-        rel="noopener noreferrer"
-        style="text-decoration: underline;"
-      >
-        Google: Data Engineer Basics</a
-      >
-    </li>
+    {
+      certifications.map(({ label, href }) => (
+        <li>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline"
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Languages</div>
-  </div>
+  <h2 class="text-3xl w-full font-bold mb-5">Languages</h2>
 
   <ul class="list-disc mx-6 mb-10 grid gap-2">
-    <li>German – mother tongue</li>
-    <li>English – fluent</li>
-    <li>French – intermediate</li>
+    {languages.map((language) => <li>{language}</li>)}
   </ul>
 </BaseLayout>

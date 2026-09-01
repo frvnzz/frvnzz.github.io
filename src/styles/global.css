@@ -1,35 +1,21 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Only the two themes wired up to the header toggle - see src/config.ts. */
 @plugin "daisyui" {
-    themes: all;
-    darkTheme: dark;
+    themes: business --default, autumn;
 }
 
-.menu li>a {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    box-sizing: border-box;
+/*
+ * daisyUI lays menu links out as an inline grid, which leaves the active
+ * highlight narrower than its row. Stretch links to fill the sidebar instead.
+ */
+.menu li > a {
+    display: block;
+    padding-inline: 1rem;
 }
 
-/* Ensure active menu item stays full width */
-.menu li>a.bg-base-300 {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    box-sizing: border-box;
-}
-
-.menu {
-    width: 100%;
-    max-width: 100%;
-}
-
-.time-line-container>div:last-child .education__time>.education__line {
+/* The timeline connector is drawn between entries, so the last one omits it. */
+.time-line-container > div:last-child .education__time > .education__line {
     display: none;
 }

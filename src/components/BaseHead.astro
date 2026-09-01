@@ -1,49 +1,57 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
+// Imported here so the global stylesheet is included on every page that
+// renders <BaseHead />.
 import "../styles/global.css";
+import { getImage } from "astro:assets";
+import profile from "../assets/profile.png";
 
-export interface Props {
-	title: string;
-	description: string;
-	image?: string;
-	ogType?: string;
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  ogType?: string;
 }
 
-const {
-	title,
-	description,
-	image = "/social_img.webp",
-	ogType = "website",
-} = Astro.props;
+const { title, description, image, ogType = "website" } = Astro.props;
+
+// Social crawlers need an absolute URL, so the share image is emitted up front
+// rather than relying on a file in `public/`.
+const socialImage = await getImage({
+  src: profile,
+  width: 600,
+  format: "webp",
+});
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const socialImageURL = new URL(image ?? socialImage.src, Astro.site ?? Astro.url);
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={canonicalURL} />
 
 <!-- Favicons -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-<link rel="mask-icon" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
-<meta name="title" content={title} />
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={ogType} />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:image:alt" content={`${title} portrait`} />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<!-- Twitter: the share image is a square portrait, so a summary card suits it. -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImageURL} />

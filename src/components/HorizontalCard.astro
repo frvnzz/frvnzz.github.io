@@ -1,41 +1,58 @@
 ---
-const { title, img, desc, url, badge, tags, target = "_blank", loading = "lazy" } = Astro.props;
 import { Image } from "astro:assets";
-const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
+
+interface Props {
+  title: string;
+  desc: string;
+  url: string;
+  /** Imported asset (optimised by Astro) or a path under `public/`. */
+  img?: ImageMetadata | string;
+  badge?: string;
+  loading?: "eager" | "lazy";
+}
+
+const { title, img, desc, url, badge, loading = "lazy" } = Astro.props;
+
+// The card is one large link, so images are decorative rather than informative.
+const imgClass = "max-w-full md:max-w-52 rounded-lg";
+const sizes = "(min-width: 768px) 208px, 100vw";
 ---
 
-<div class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%]">
-  <a href={url} target={target}>
+<div
+  class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%]"
+>
+  <a href={url} target="_blank" rel="noopener noreferrer">
     <div class="hero-content flex-col md:flex-row">
       {
-        img && (
-          <Image
+        typeof img === "string" ? (
+          <img
             src={img}
-            width={750}
-            height={422}
-            format="webp"
-            alt={title}
-            class="max-w-full md:max-w-52 rounded-lg"
+            alt=""
+            class={imgClass}
+            width={600}
+            height={300}
             loading={loading}
           />
+        ) : (
+          img && (
+            <Image
+              src={img}
+              alt=""
+              class={imgClass}
+              width={416}
+              widths={[208, 416, 624, 832]}
+              sizes={sizes}
+              loading={loading}
+            />
+          )
         )
       }
       <div class="grow w-full">
-        <h1 class="text-xl font-bold">
+        <h2 class="text-xl font-bold">
           {title}
-          {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
-        </h1>
-        <p class="py-1 text-1xl">{desc}</p>
-        <div class="card-actions justify-end">
-          {
-            tags &&
-              tags.map((tag) => (
-                <a href={`${tag_url}/${tag}`} class="badge badge-outline">
-                  {tag}
-                </a>
-              ))
-          }
-        </div>
+          {badge && <span class="badge badge-secondary mx-2">{badge}</span>}
+        </h2>
+        <p class="py-1">{desc}</p>
       </div>
     </div>
   </a>

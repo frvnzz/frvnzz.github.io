@@ -1,0 +1,63 @@
+---
+import { THEMES } from "../config";
+---
+
+{/*
+  Lives in <head> so the stored theme is applied before first paint.
+  Owns both the initial theme and the header toggle, so there is a single
+  place that knows how a theme is stored and applied.
+*/}
+<script is:inline define:vars={{ THEMES }}>
+  (() => {
+    // View transitions can re-run body scripts; make setup idempotent.
+    if (window.__themeInit) return;
+    window.__themeInit = true;
+
+    const root = document.documentElement;
+
+    const read = () => {
+      try {
+        return localStorage.getItem("theme");
+      } catch {
+        // Storage can be unavailable (private mode, blocked cookies).
+        return null;
+      }
+    };
+
+    const setMode = (mode) => {
+      root.setAttribute("data-mode", mode);
+      root.setAttribute("data-theme", THEMES[mode]);
+    };
+
+    const applyStoredTheme = () => {
+      const stored = read();
+      // Older builds stored the daisyUI theme name instead of the mode.
+      setMode(stored === "light" || stored === THEMES.light ? "light" : "dark");
+    };
+
+    root.classList.remove("no-js");
+    applyStoredTheme();
+
+    // Swapped-in markup carries the server-rendered default theme.
+    document.addEventListener("astro:after-swap", applyStoredTheme);
+
+    // Delegated so the handler survives swaps without needing to re-bind.
+    document.addEventListener("click", (event) => {
+      if (
+        !(event.target instanceof Element) ||
+        !event.target.closest("#theme-toggle")
+      ) {
+        return;
+      }
+
+      const mode = root.getAttribute("data-mode") === "dark" ? "light" : "dark";
+      setMode(mode);
+
+      try {
+        localStorage.setItem("theme", mode);
+      } catch {
+        // The preference simply will not persist.
+      }
+    });
+  })();
+</script>

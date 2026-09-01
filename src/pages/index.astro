@@ -1,80 +1,89 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HorizontalCard from "../components/HorizontalCard.astro";
-import createSlug from "../lib/createSlug";
+
+const skills = [
+  {
+    group: "Programming Languages",
+    items: ["C#", "JavaScript", "TypeScript", "Kotlin"],
+  },
+  {
+    group: "Tools & Technologies",
+    items: [
+      "React",
+      "Node.js",
+      "Next.js",
+      "Astro",
+      "Room Database",
+      "Unity",
+      "Tailwind CSS",
+      "npm/pnpm",
+      "Yarn",
+      "Homebrew",
+    ],
+  },
+  {
+    group: "Version Control & CI/CD",
+    items: ["Git", "GitHub Actions", "GitLab Pipelines"],
+  },
+  {
+    group: "Design",
+    items: [
+      "Procreate",
+      "Figma",
+      "Blender",
+      "Adobe Creative Suite",
+      "Affinity Suite",
+    ],
+  },
+  {
+    group: "General",
+    items: [
+      "Agile Development",
+      "Kanban",
+      "UI/UX Research",
+      "Responsive Web Design",
+      "Accessibility (a11y) Best Practices",
+      "User Interface Design",
+    ],
+  },
+];
 ---
 
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-12 mt-5">
-    <div class="text-xl py-1">Hi 👋</div>
-    <div class="text-5xl font-bold">I'm Franz-Aurel Huber</div>
-    <div class="text-3xl py-3 font-bold">Student at UAS St. Pölten</div>
-    <div class="py-2 text-lg">
+    <p class="text-xl py-1">Hi 👋</p>
+    <h1 class="text-5xl font-bold">I'm Franz-Aurel Huber</h1>
+    <p class="text-3xl py-3 font-bold">Student at UAS St. Pölten</p>
+    <p class="py-2 text-lg">
       I like <b>frontend development</b> and <b>UI/UX design</b>. I am
       passionate about creating seamless digital experiences and I love cars. I
       started programming in late 2023 as part of my studies and I aim to
       improve ever since.
-    </div>
+    </p>
     <div class="py-2 text-lg">
       <a
         href="https://github.com/frvnzz"
         target="_blank"
+        rel="noopener noreferrer"
         class="btn btn-outline">Check out my GitHub</a
       >
     </div>
   </div>
 
-  <div class="mt-4">
-    <div class="text-3xl font-bold mb-3">Skills &lt;/&gt;</div>
+  <section class="mt-4">
+    <h2 class="text-3xl font-bold mb-3">Skills &lt;/&gt;</h2>
 
-    <div class="text-xl font-bold mt-5">Programming Languages</div>
-    <ul class="flex flex-wrap gap-3 mt-2">
-      <li class="px-3 py-1 rounded-full border">C#</li>
-      <li class="px-3 py-1 rounded-full border">JavaScript</li>
-      <li class="px-3 py-1 rounded-full border">TypeScript</li>
-      <li class="px-3 py-1 rounded-full border">Kotlin</li>
-    </ul>
-
-    <div class="text-xl font-bold mt-5">Tools & Technologies</div>
-    <ul class="flex flex-wrap gap-3 mt-2">
-      <li class="px-3 py-1 rounded-full border">React</li>
-      <li class="px-3 py-1 rounded-full border">Node.js</li>
-      <li class="px-3 py-1 rounded-full border">Next.js</li>
-      <li class="px-3 py-1 rounded-full border">Astro</li>
-      <li class="px-3 py-1 rounded-full border">Room Database</li>
-      <li class="px-3 py-1 rounded-full border">Unity</li>
-      <li class="px-3 py-1 rounded-full border">Tailwind CSS</li>
-      <li class="px-3 py-1 rounded-full border">npm/pnpm</li>
-      <li class="px-3 py-1 rounded-full border">Yarn</li>
-      <li class="px-3 py-1 rounded-full border">Homebrew</li>
-    </ul>
-
-    <div class="text-xl font-bold mt-5">Version Control & CI/CD</div>
-    <ul class="flex flex-wrap gap-3 mt-2">
-      <li class="px-3 py-1 rounded-full border">Git</li>
-      <li class="px-3 py-1 rounded-full border">GitHub Actions</li>
-      <li class="px-3 py-1 rounded-full border">GitLab Pipelines</li>
-    </ul>
-
-    <div class="text-xl font-bold mt-5">Design</div>
-    <ul class="flex flex-wrap gap-3 mt-2">
-      <li class="px-3 py-1 rounded-full border">Procreate</li>
-      <li class="px-3 py-1 rounded-full border">Figma</li>
-      <li class="px-3 py-1 rounded-full border">Blender</li>
-      <li class="px-3 py-1 rounded-full border">Adobe Creative Suite</li>
-      <li class="px-3 py-1 rounded-full border">Affinity Suite</li>
-    </ul>
-
-    <div class="text-xl font-bold mt-5">General</div>
-    <ul class="flex flex-wrap gap-3 mt-2">
-      <li class="px-3 py-1 rounded-full border">Agile Development</li>
-      <li class="px-3 py-1 rounded-full border">Kanban</li>
-      <li class="px-3 py-1 rounded-full border">UI/UX Research</li>
-      <li class="px-3 py-1 rounded-full border">Responsive Web Design</li>
-      <li class="px-3 py-1 rounded-full border">
-        Accessibility (a11y) Best Practices
-      </li>
-      <li class="px-3 py-1 rounded-full border">User Interface Design</li>
-    </ul>
-  </div>
+    {
+      skills.map(({ group, items }) => (
+        <>
+          <h3 class="text-xl font-bold mt-5">{group}</h3>
+          <ul class="flex flex-wrap gap-3 mt-2">
+            {items.map((item) => (
+              <li class="px-3 py-1 rounded-full border">{item}</li>
+            ))}
+          </ul>
+        </>
+      ))
+    }
+  </section>
 </BaseLayout>

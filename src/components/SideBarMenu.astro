@@ -1,43 +1,37 @@
 ---
+interface Props {
+  sideBarActiveItemID?: string;
+}
+
 const { sideBarActiveItemID } = Astro.props;
-const activeClass = "bg-base-300"; // For primary color replace with `active` class
+
+// Highlight for the current page. For primary colour, use `active` instead.
+const activeClass = "bg-base-300";
+
+const links = [
+  { id: "home", label: "Home", href: "/" },
+  { id: "projects", label: "Projects", href: "/projects" },
+  { id: "cv", label: "CV", href: "/cv" },
+];
 ---
 
-<ul class="menu grow shrink menu-md overflow-y-auto">
-  <li class="mb-1">
-    <a
-      class:list={[
-        "py-3 text-base",
-        sideBarActiveItemID === "home" && activeClass,
-      ]}
-      aria-current={sideBarActiveItemID === "home" ? "page" : undefined}
-      href="/"
-    >
-      Home
-    </a>
-  </li>
-  <li class="mb-1">
-    <a
-      class:list={[
-        "py-3 text-base",
-        sideBarActiveItemID === "projects" && activeClass,
-      ]}
-      aria-current={sideBarActiveItemID === "projects" ? "page" : undefined}
-      href="/projects"
-    >
-      Projects
-    </a>
-  </li>
-  <li>
-    <a
-      class:list={[
-        "py-3 text-base",
-        sideBarActiveItemID === "cv" && activeClass,
-      ]}
-      aria-current={sideBarActiveItemID === "cv" ? "page" : undefined}
-      href="/cv"
-    >
-      CV
-    </a>
-  </li>
-</ul>
+<nav class="grow shrink overflow-y-auto" aria-label="Main">
+  <ul class="menu menu-md w-full">
+    {
+      links.map(({ id, label, href }) => {
+        const isActive = sideBarActiveItemID === id;
+        return (
+          <li class="mb-1">
+            <a
+              href={href}
+              class:list={["py-3 text-base", isActive && activeClass]}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {label}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
