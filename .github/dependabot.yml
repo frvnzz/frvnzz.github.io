@@ -5,9 +5,31 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    # Without grouping each dependency opens its own PR, which piles up fast.
+    # Majors stay ungrouped so breaking changes are reviewed on their own.
+    groups:
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+        update-types: ["minor", "patch"]
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "daisyui"
+        update-types: ["minor", "patch"]
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types: ["minor", "patch"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns:
+          - "*"
