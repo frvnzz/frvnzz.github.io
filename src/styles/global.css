@@ -21,3 +21,25 @@
 .time-line-container > div:last-child .education__time > .education__line {
   display: none;
 }
+
+/*
+ * Card and avatar hovers scale, the header animates its blur, and the
+ * ClientRouter cross-fades pages. Collapse all of it for readers who ask the
+ * OS for reduced motion; the states still apply, they just stop animating.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
