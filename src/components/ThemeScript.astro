@@ -2,11 +2,13 @@
 import { THEMES } from "../config";
 ---
 
-{/*
+{
+  /*
   Lives in <head> so the stored theme is applied before first paint.
   Owns both the initial theme and the header toggle, so there is a single
   place that knows how a theme is stored and applied.
-*/}
+*/
+}
 <script is:inline define:vars={{ THEMES }}>
   (() => {
     // View transitions can re-run body scripts; make setup idempotent.

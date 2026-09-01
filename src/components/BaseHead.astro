@@ -23,7 +23,10 @@ const socialImage = await getImage({
 });
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
-const socialImageURL = new URL(image ?? socialImage.src, Astro.site ?? Astro.url);
+const socialImageURL = new URL(
+  image ?? socialImage.src,
+  Astro.site ?? Astro.url,
+);
 ---
 
 <!-- Global Metadata -->

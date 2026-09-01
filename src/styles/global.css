@@ -3,7 +3,9 @@
 
 /* Only the two themes wired up to the header toggle - see src/config.ts. */
 @plugin "daisyui" {
-    themes: business --default, autumn;
+  themes:
+    business --default,
+    autumn;
 }
 
 /*
@@ -11,11 +13,11 @@
  * highlight narrower than its row. Stretch links to fill the sidebar instead.
  */
 .menu li > a {
-    display: block;
-    padding-inline: 1rem;
+  display: block;
+  padding-inline: 1rem;
 }
 
 /* The timeline connector is drawn between entries, so the last one omits it. */
 .time-line-container > div:last-child .education__time > .education__line {
-    display: none;
+  display: none;
 }
