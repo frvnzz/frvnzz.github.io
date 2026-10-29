@@ -15,15 +15,15 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.2.9",
+    "astro": "^7.4.2",
     "daisyui": "^5.7.22",
     "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.12",
     "@tailwindcss/typography": "^0.5.20",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
